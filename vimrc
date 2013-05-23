@@ -16,7 +16,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set list
-set listchars=tab:>-,trail:-  
+set listchars=tab:>-,trail:-
 au FileType Makefile set noexpandtab
 
 set scrolloff=5
@@ -105,3 +105,12 @@ nnoremap <silent> <F8> :NERDTreeToggle<CR>
 autocmd vimenter * if !argc() | NERDTree | endif
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" yankring
+nnoremap <silent><F11> :YRShow<CR>
+
+" easymotion
+let g:EasyMotion_leader_key='<Leader>'
+
+" tagbar
+nmap <F9> :TagbarToggle<CR>
