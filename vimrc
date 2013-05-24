@@ -11,10 +11,15 @@ set history=50	     " keep 50 lines of command line history
 set ruler	         " show the cursor position all the time
 set autoread	     " auto read when file is changed from outside
 
+set nobackup	     " no *~ backup files
+set nowb
+set noswapfile
+
 set expandtab        "replace <TAB> with spaces
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+set smarttab	     " insert tabs on the start of a line according to context
 set list
 set listchars=tab:>-,trail:-
 au FileType Makefile set noexpandtab
@@ -22,14 +27,18 @@ au FileType Makefile set noexpandtab
 set scrolloff=5
 
 filetype plugin indent on
+set copyindent	     " copy the previous indentation on autoindenting
 
 syntax on	         " syntax highlight
 set hlsearch	     " search highlighting
 "colorscheme torte
+colorscheme desert
+set background=dark
 
 set cursorline
 set cursorcolumn
-highlight cursorline cterm=none ctermbg=7 ctermfg=none
+"highlight cursorline cterm=none ctermbg=7 ctermfg=none
+"highlight cursorcolumn cterm=none ctermbg=7 ctermfg=none
 
 set clipboard=unnamed   " yank to the system register (*) by default
 set showmatch	     " Cursor shows matching ) and }
@@ -40,17 +49,23 @@ set wildignore=*.o,*.class,*.pyc
 
 set autoindent	     " auto indentation
 set smartindent
+
 set incsearch	     " incremental search
-set nobackup	     " no *~ backup files
-"set copyindent	     " copy the previous indentation on autoindenting
 set ignorecase	     " ignore case when searching
 set smartcase	     " ignore case if search pattern is all lowercase,case-sensitive otherwise
-set smarttab	     " insert tabs on the start of a line according to context
 
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
 
 "set cmdheight=2
 " status line {
@@ -93,11 +108,29 @@ map <S-L> gt
 
 map <C-t><C-t> :tabnew<CR>
 map <C-t><C-w> :tabclose<CR>
+" Useful mappings for managing tabs
+map <leader>tt :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tw :tabclose<cr>
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+nnoremap j gj
+nnoremap k gk
+
+map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 nmap <leader>p :set paste!<BAR>set paste?<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " nerdtree
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
@@ -110,7 +143,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nnoremap <silent><F11> :YRShow<CR>
 
 " easymotion
-let g:EasyMotion_leader_key='<Leader>'
+let g:EasyMotion_leader_key='<Leader><leader>'
 
 " tagbar
 nmap <F9> :TagbarToggle<CR>
