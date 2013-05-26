@@ -11,6 +11,13 @@ set history=50	     " keep 50 lines of command line history
 set ruler	         " show the cursor position all the time
 set autoread	     " auto read when file is changed from outside
 
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
 set nobackup	     " no *~ backup files
 set nowb
 set noswapfile
@@ -32,7 +39,7 @@ set copyindent	     " copy the previous indentation on autoindenting
 syntax on	         " syntax highlight
 set hlsearch	     " search highlighting
 "colorscheme torte evening
-colorscheme desert
+"colorscheme desert
 set background=dark
 
 set cursorline
