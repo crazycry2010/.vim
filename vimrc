@@ -31,14 +31,14 @@ set copyindent	     " copy the previous indentation on autoindenting
 
 syntax on	         " syntax highlight
 set hlsearch	     " search highlighting
-"colorscheme torte
+"colorscheme torte evening
 colorscheme desert
 set background=dark
 
 set cursorline
 set cursorcolumn
-"highlight cursorline cterm=none ctermbg=7 ctermfg=none
-"highlight cursorcolumn cterm=none ctermbg=7 ctermfg=none
+highlight cursorline cterm=none ctermbg=7 ctermfg=none
+highlight cursorcolumn cterm=none ctermbg=7 ctermfg=none
 
 set clipboard=unnamed   " yank to the system register (*) by default
 set showmatch	     " Cursor shows matching ) and }
@@ -90,10 +90,10 @@ endfunction
 
 "}
 
-imap ∆ <ESC><Down>
-imap ˙ <ESC><Left>
-imap ˚ <ESC><Up>
-imap ¬ <ESC><Right>
+"imap ∆ <ESC><Down>
+"imap ˙ <ESC><Left>
+"imap ˚ <ESC><Up>
+"imap ¬ <ESC><Right>
 
 let mapleader=","
 let g:mapleader=","
