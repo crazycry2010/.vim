@@ -39,7 +39,7 @@ set copyindent	     " copy the previous indentation on autoindenting
 syntax on	         " syntax highlight
 set hlsearch	     " search highlighting
 "colorscheme torte evening
-"colorscheme desert
+colorscheme desert
 set background=dark
 
 set cursorline
