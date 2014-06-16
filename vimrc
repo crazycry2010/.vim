@@ -4,12 +4,15 @@ call pathogen#infect()
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
+" Must be first line
+set nocompatible	 " not compatible with the old-fashion vi mode 
 set nu
-set nocompatible	 " not compatible with the old-fashion vi mode
 set bs=2	         " allow backspacing over everything in insert mode
 set history=50	     " keep 50 lines of command line history
 set ruler	         " show the cursor position all the time
 set autoread	     " auto read when file is changed from outside
+" set autowirte     " Automatically write a file when leaving a modified buffer
+set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility 
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
@@ -17,6 +20,8 @@ set autoread	     " auto read when file is changed from outside
 silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload"
 
 set nobackup	     " no *~ backup files
 set nowb
@@ -28,22 +33,32 @@ set tabstop=4
 set softtabstop=4
 set smarttab	     " insert tabs on the start of a line according to context
 set list
-set listchars=tab:>-,trail:-
+set listchars=tab:>-,trail:-,extends:#,nbsp:.
 au FileType Makefile set noexpandtab
 
-set scrolloff=5
+"set splitright                  " Puts new vsplit windows to the right of the current
+"set splitbelow                  " Puts new split windows to the bottom of the current
 
-filetype plugin indent on
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=5                 " Minimum lines to keep above and below cursor
+
+filetype plugin indent on " Automatically detect file types.
 set copyindent	     " copy the previous indentation on autoindenting
+
+" set mouse=a        " Automatically enable mouse usage
+set mousehide        " Hide the mouse cursor while typing
 
 syntax on	         " syntax highlight
 set hlsearch	     " search highlighting
 "colorscheme torte evening
-colorscheme desert
-set background=dark
+" colorscheme desert
+set background=dark  " Assume a dark background
+colorscheme solarized
 
 set cursorline
 set cursorcolumn
+"highlight clear SignColumn
+highlight clear LineNr
 highlight cursorline cterm=none ctermbg=7 ctermfg=none
 highlight cursorcolumn cterm=none ctermbg=7 ctermfg=none
 
@@ -53,6 +68,7 @@ set showmode	     " Show current mode
 set wildchar=<TAB>	 " start wild expansion in the command line using <TAB>
 set wildmenu         " wild char completion menu
 set wildignore=*.o,*.class,*.pyc
+set spell               " Spell checking on
 
 set autoindent	     " auto indentation
 set smartindent
@@ -77,10 +93,13 @@ set viminfo^=%
 "set cmdheight=2
 " status line {
 set laststatus=2
-set statusline=\ %{HasPaste()}%<%-15.25(%f%)%m%r%h\ %w\ \
-set statusline+=\ \ \ [%{&ff}/%Y]
-set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
-set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
+"set statusline=%{HasPaste()}%<%f\        " Filename
+"set statusline+=%w%h%m%r                 " Options
+"set statusline+=%{fugitive#statusline()} " Git Hotness
+"set statusline+=\ [%{&ff}/%Y]            " Filetype
+"set statusline+=\ [%{CurDir()}]          " Current dir
+"set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+
 
 function! CurDir()
     let curdir = substitute(getcwd(), $HOME, "~", "")
@@ -154,3 +173,12 @@ let g:EasyMotion_leader_key='<Leader><leader>'
 
 " tagbar
 nmap <F9> :TagbarToggle<CR>
+
+" Ctrlp
+let g:ctrlp_map = '<leader>cp'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" vim-powerline
+" let g:Powerline_symbols = 'fancy'
+
