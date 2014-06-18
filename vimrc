@@ -1,5 +1,6 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+call pathogen#helptags()
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -93,12 +94,12 @@ set viminfo^=%
 "set cmdheight=2
 " status line {
 set laststatus=2
-"set statusline=%{HasPaste()}%<%f\        " Filename
-"set statusline+=%w%h%m%r                 " Options
-"set statusline+=%{fugitive#statusline()} " Git Hotness
-"set statusline+=\ [%{&ff}/%Y]            " Filetype
-"set statusline+=\ [%{CurDir()}]          " Current dir
-"set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+set statusline=%{HasPaste()}%<%f\        " Filename
+set statusline+=%w%h%m%r                 " Options
+set statusline+=%{fugitive#statusline()} " Git Hotness
+set statusline+=\ [%{&ff}/%Y]            " Filetype
+set statusline+=\ [%{CurDir()}]          " Current dir
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 
 function! CurDir()
@@ -143,8 +144,8 @@ map <leader>tw :tabclose<cr>
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
@@ -161,7 +162,7 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 " nerdtree
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 " open a NERDTree automatically when vim starts up if no files were specified
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter * if !argc() | NERDTree | endif
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -182,3 +183,5 @@ let g:ctrlp_working_path_mode = 'ra'
 " vim-powerline
 " let g:Powerline_symbols = 'fancy'
 
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
