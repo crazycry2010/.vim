@@ -7,6 +7,7 @@ e.g.
 git submodule add https://github.com/crazycry2010/submodule/***   ./submodule/***
 
 2. clone
+
 2.1 clone submodle
 git submodule init
 git submodule update
@@ -14,6 +15,7 @@ git submodule update
 git clone --recursive https://github.com/crazycry2010/***
 
 3. 工程1中，修改submodule并提交
+
 3.1 修改submodle工程，并提交
 cd submodule/***
 // vi ***(修改)
@@ -26,10 +28,12 @@ git commit -a -m "***"
 git push
 
 4. 协同开发工程1的人，更新submodule
+
 git pull
 git submodule update
 
 5. 工程2中，更新submodule
+
 git submodule foreach git checkout master
 git submodule foreach git pull
 或
