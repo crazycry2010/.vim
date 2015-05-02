@@ -33,19 +33,21 @@ Remove Submodule
 
 1. Remove config entries in .gitmodules
 
-    git config -f .gitmodules --remove-section submodule.$submodulepath
-    
+    `git config -f .gitmodules --remove-section submodule.$submodulepath`
+ 
 2. Remove config entries in .git/config
-    git config -f .git/config --remove-section submodule.$submodulepath
+
+    `git config -f .git/config --remove-section submodule.$submodulepath`
+ 
 3. Remove directory from index
-    git rm --cached $submodulepath
+    `git rm --cached $submodulepath`
 4. Track changes made to .gitmodules
-    git add .gitmodules
+    ```git add .gitmodules
     git commit -m "DEL: submodule $submodule_name"
-    git push
+    git push```
 5. Delete the now untracked submodule files
-    rm -rf $submodulepath
-    rm -rf .git/modules/$submodulepath
+    ```rm -rf $submodulepath
+    rm -rf .git/modules/$submodulepath```
 
 
 Update Submodule
