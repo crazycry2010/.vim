@@ -30,8 +30,7 @@
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened
     " Always switch to the current file directory
-    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h |#
-
+    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     " set autowirte     " Automatically write a file when leaving a modified buffer
     set autoread
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility 
