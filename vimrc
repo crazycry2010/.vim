@@ -1,4 +1,4 @@
-" ctags -R --c++-kinds=+p --fields=+iaS --extra=+q src
+" ctags -R --langmap=c++:+.cu --c++-kinds=+p --fields=+iaS --extra=+q src
 " Environment {
     runtime bundle/vim-pathogen/autoload/pathogen.vim
     call pathogen#infect()
@@ -245,7 +245,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
 
 " Plugins {
     " Ctags {
-        set tags=./tags;/,~/.vimtags
+        set tags=tags;/,~/.vimtags
         set tags+=/usr/include/sys.tags
     " }
 
@@ -277,6 +277,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
     
     " TagBar {
         nmap <F9> :TagbarToggle<CR>
+        au BufNewFile,BufRead *.cuh set ft=cuda
     " }
 
     " vim-airline {
