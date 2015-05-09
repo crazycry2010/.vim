@@ -30,8 +30,7 @@
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened
     " Always switch to the current file directory
-    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h |#
-
+    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     " set autowirte     " Automatically write a file when leaving a modified buffer
     set autoread
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility 
@@ -85,6 +84,7 @@
     "highlight clear CursorLineNr    " Remove highlight color from current line#
     "highlight cursorline cterm=none ctermbg=7 ctermfg=none
     "highlight cursorcolumn cterm=none ctermbg=7 ctermfg=none
+    highlight cursorline term=underline cterm=underline guibg=#202020
     set ruler                   " Show the ruler                            
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
     "set cmdheight=2
@@ -235,6 +235,8 @@
     " Super useful! From an idea by Michael Naumann
     vnoremap <silent> * :call VisualSelection('f')<CR>
     vnoremap <silent> # :call VisualSelection('b')<CR>
+
+    map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 " }
 
 set encoding=utf-8
