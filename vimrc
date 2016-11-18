@@ -15,7 +15,7 @@
     set background=dark         " Assume a dark background
     filetype plugin indent on   " Automatically detect file types.
     syntax on                   " Syntax highlighting
-    "set mouse=a                 " Automatically enable mouse usage
+    set mouse=a                 " Automatically enable mouse usage
     set mousehide               " Hide the mouse cursor while typing
     scriptencoding utf-8
 
@@ -68,12 +68,11 @@
 
 " Vim UI {
     let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
+    let g:solarized_termtrans=0
     let g:solarized_contrast="normal"
     let g:solarized_visibility="normal"
     "colorscheme solarized
     colorscheme molokai
-    "colorscheme desert
 
     set showmode	     " Show current mode
 
@@ -94,12 +93,12 @@
         set laststatus=2
 
         " Broken down into easily includeable segments
-        set statusline=%<%f\                     " Filename
-        set statusline+=%w%h%m%r                 " Options
-        set statusline+=%{fugitive#statusline()} " Git Hotness
-        set statusline+=\ [%{&ff}/%Y]            " Filetype
-        set statusline+=\ [%{getcwd()}]          " Current dir
-        set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+        "set statusline=%<%f\                     " Filename
+        "set statusline+=%w%h%m%r                 " Options
+        "set statusline+=%{fugitive#statusline()} " Git Hotness
+        "set statusline+=\ [%{&ff}/%Y]            " Filetype
+        "set statusline+=\ [%{getcwd()}]          " Current dir
+        "set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     " }
 
     set backspace=indent,eol,start  " Backspace for dummies
@@ -168,7 +167,7 @@
         map <C-L> <C-W>l<C-W>_
         map <C-H> <C-W>h<C-W>_
 
-        map <S-h> gT
+        map <S-H> gT
         map <S-L> gt
     " }
 
@@ -178,7 +177,7 @@
 
     "UPPERCASE and lowsercase conversion
     nnoremap gu gUiW
-    nnoremap gl guiW     
+    nnoremap gl guiW
 
    "go to first and last char of line
     nnoremap H ^
@@ -209,17 +208,6 @@
         map <leader>tt :tabnew<cr>
         map <leader>to :tabonly<cr>
         map <leader>tw :tabclose<cr>
-
-        noremap <leader>1 1gt
-        noremap <leader>2 2gt
-        noremap <leader>3 3gt
-        noremap <leader>4 4gt
-        noremap <leader>5 5gt
-        noremap <leader>6 6gt
-        noremap <leader>7 7gt
-        noremap <leader>8 8gt
-        noremap <leader>9 9gt
-        noremap <leader>0 :tablast<cr>
 
         " Opens a new tab with the current buffer's path
         " Super useful when editing files in the same directory
@@ -261,19 +249,30 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
         let NERDTreeMouseMode=2
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
-        let g:nerdtree_tabs_open_on_gui_startup=0
+        "let g:nerdtree_tabs_open_on_gui_startup=0
+        let NERDTreeWinPos='right'
+        let NERDTreeWinSize=33
         " close vim if the only window left open is a NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
     " }
     
     " ctrlp {
-        let g:ctrlp_working_path_mode = 'ra'
+        let g:ctrlp_working_path_mode = ''
         let g:ctrlp_map = '<leader>cp'
         let g:ctrlp_cmd = 'CtrlP'
+        set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+        set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+        let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
         let g:ctrlp_custom_ignore = {
-                        \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                        \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+          \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+          \ 'file': '\v\.(exe|so|dll)$',
+          \ 'link': 'some_bad_symbolic_links',
+          \ }
+
+        let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+        let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
     " }
     
@@ -283,15 +282,13 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
     " }
 
     " vim-airline {
-        set t_Co=256
-        "let g:airline_powerline_fonts=1
-        let g:airline_theme = 'solarized'
+        let g:airline_theme="molokai"
+        "let g:airline_theme = 'solarized'
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline_powerline_fonts=0
         "let Powerline_symbols='fancy'
-        if !exists('g:airline_powerline_fonts')
-            " Use the default set of separators with a few customizations
-            let g:airline_left_sep='›'  " Slightly fancier than '>'
-            let g:airline_right_sep='‹' " Slightly fancier than '<'
-        endif
+        let g:airline#extensions#tabline#left_sep = ' '
+        let g:airline#extensions#tabline#left_alt_sep = '|'
     " }
 
     " yankring {
