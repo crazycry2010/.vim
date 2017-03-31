@@ -13,6 +13,7 @@
 
 " General {
     set background=dark         " Assume a dark background
+    set t_Co=256
     filetype plugin indent on   " Automatically detect file types.
     syntax on                   " Syntax highlighting
     set mouse-=a                 " Automatically enable mouse usage
@@ -198,6 +199,17 @@
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
 
+    noremap <leader>1 1gt
+    noremap <leader>2 2gt
+    noremap <leader>3 3gt
+    noremap <leader>4 4gt
+    noremap <leader>5 5gt
+    noremap <leader>6 6gt
+    noremap <leader>7 7gt
+    noremap <leader>8 8gt
+    noremap <leader>9 9gt
+    noremap <leader>0 :tablast<cr>
+
     "imap ∆ <ESC><Down>
     "imap ˙ <ESC><Left>
     "imap ˚ <ESC><Up>
@@ -258,7 +270,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,latin1
     " }
     
     " ctrlp {
-        let g:ctrlp_working_path_mode = ''
+        let g:ctrlp_working_path_mode = 'ra'
         let g:ctrlp_map = '<leader>cp'
         let g:ctrlp_cmd = 'CtrlP'
         set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
